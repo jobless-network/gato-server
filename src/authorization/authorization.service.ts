@@ -66,7 +66,7 @@ export class AuthorizationService {
     }
 
     signatureMessageForWallet(wallet: Wallet) {
-        return "This is a proof for Gato that I own the wallet, nonce:" + wallet.nonce; 
+        return "This is a proof for Gato that I own the wallet, nonce: " + wallet.nonce; 
     }
 
     async isRequired(organization: string, gateType: GateType, gateId: string) {

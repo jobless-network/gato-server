@@ -36,6 +36,8 @@ export class AuthorizationController {
     async signatureRequest(
         @Query('address') address: string,
     ) {
-        return await this.authorizationService.signatureRequest(address);
+        return {
+            message: await this.authorizationService.signatureRequest(address)
+        };
     }
 }
