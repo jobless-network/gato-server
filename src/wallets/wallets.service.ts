@@ -11,13 +11,13 @@ export class WalletsService {
     ) {}
 
     async addWallet(address): Promise<Wallet> {
-        let wallets = await this.walletRepository.find({ where: { address: address } });
+        let wallet = await this.walletRepository.findOne({ where: { address: address } });
 
-        if (wallets.length === 0) {
-            return await this.walletRepository.save({ wallet: address, nonce: this.genertateNonce() });
+        if (!wallet) {
+            wallet = await this.walletRepository.save({ wallet: address, nonce: this.genertateNonce() });
         }
 
-        return wallets[0];
+        return wallet;
     }
 
     async getWallet(address): Promise<Wallet> {
