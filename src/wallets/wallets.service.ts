@@ -14,7 +14,7 @@ export class WalletsService {
         let wallet = await this.walletRepository.findOne({ where: { address: address } });
 
         if (!wallet) {
-            wallet = await this.walletRepository.save({ wallet: address, nonce: this.genertateNonce() });
+            wallet = await this.walletRepository.save({ address: address, nonce: this.genertateNonce() });
         }
 
         return wallet;
