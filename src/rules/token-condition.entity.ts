@@ -16,6 +16,7 @@ export class TokenCondition{
   @Column({ default: 1 })
   chainId: number;
 
+  @Column()
   contractAddress: string;
 
   @Column({
