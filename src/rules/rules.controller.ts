@@ -16,6 +16,7 @@ type CreateRuleDto = {
     conditions: TokenConditionDto[];
     gateType: GateType;
     gateId: string;
+    description: string;
   };
 
 @Controller('rules')

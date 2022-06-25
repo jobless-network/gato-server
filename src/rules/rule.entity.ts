@@ -11,6 +11,9 @@ export class Rule{
   id?: number;
 
   @Column()
+  description: string;
+
+  @Column()
   organization: string;
 
   @Column({
