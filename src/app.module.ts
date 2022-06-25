@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RulesModule } from './rules/rules.module';
 import { AuthorizationModule } from './authorization/authorization.module';
+import { WalletsModule } from './wallets/wallets.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AuthorizationModule } from './authorization/authorization.module';
       autoLoadEntities: true,
     }),
     AuthorizationModule,
+    WalletsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

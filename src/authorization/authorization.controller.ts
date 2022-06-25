@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Post, Query } from '@nestjs/common';
 import { GateType } from 'src/rules/gate-type';
 import { AuthorizationService } from './authorization.service';
 
@@ -23,12 +23,19 @@ export class AuthorizationController {
         );
     }
 
-    @Get('/required/')
+    @Get('/required')
     async isReuqired(
         @Query('organization') organization: string,
         @Query('gateType') gateType: GateType,
         @Query('gateId') gateId: string,
     ) {
         return await this.authorizationService.isRequired(organization, gateType, gateId);
+    }
+
+    @Get('/signature_request')
+    async signatureRequest(
+        @Query('address') address: string,
+    ) {
+        return await this.authorizationService.signatureRequest(address);
     }
 }
