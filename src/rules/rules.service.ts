@@ -37,4 +37,13 @@ export class RulesService {
             conditions: true,
         }})
       }
+
+      ruleExists(organization: string, gateType: GateType, gateId: string): Promise<boolean> {
+        return this.rulesRepository.findOne({ where: {
+            organization: organization,
+            gateType: gateType,
+            gateId: gateId
+        }})
+        .then(rule => !!rule)
+      }
 }

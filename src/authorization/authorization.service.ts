@@ -8,8 +8,7 @@ import { TokenCondition } from 'src/rules/token-condition.entity';
 import { setFlagsFromString } from 'v8';
 
 @Injectable()
-export class AuthorizationService {
-    
+export class AuthorizationService {    
     constructor(
         private readonly httpService: HttpService,
         private readonly rulesService: RulesService
@@ -43,5 +42,9 @@ export class AuthorizationService {
         return data.items.some((tokenData) => 
             tokenData.contract_address === contractAddress && parseInt(tokenData.balance, 10) >= amount
         );
+    }
+
+    async isRequired(organization: string, gateType: GateType, gateId: string) {
+        return await this.rulesService.ruleExists(organization, gateType, gateId);
     }
 }

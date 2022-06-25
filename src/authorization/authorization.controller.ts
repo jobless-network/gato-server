@@ -6,13 +6,22 @@ import { AuthorizationService } from './authorization.service';
 export class AuthorizationController {
     constructor(private readonly authorizationService: AuthorizationService) {}
 
-    @Get()
-    async authorize(
+    @Get('/authorized')
+    async isAuthorized(
         @Query('address') address: string,
         @Query('organization') organization: string,
         @Query('gateType') gateType: GateType,
         @Query('gateId') gateId: string,
     ) {
         return await this.authorizationService.isAuthorized(address, organization, gateType, gateId);
+    }
+
+    @Get('/required/')
+    async isReuqired(
+        @Query('organization') organization: string,
+        @Query('gateType') gateType: GateType,
+        @Query('gateId') gateId: string,
+    ) {
+        return await this.authorizationService.isRequired(organization, gateType, gateId);
     }
 }
