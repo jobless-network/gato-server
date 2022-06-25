@@ -15,8 +15,8 @@ export class AuthorizationController {
         @Query('gateId') gateId: string,
     ) {
         return await this.authorizationService.isAuthorized(
-            address.toLocaleLowerCase(),
-            signature.toLocaleLowerCase(),
+            address.toLowerCase(),
+            signature.toLowerCase(),
             organization,
             gateType,
             gateId

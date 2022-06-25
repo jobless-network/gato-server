@@ -30,7 +30,11 @@ export class AuthorizationService {
     ) : Promise<boolean> {
         let message = "GATO Access Control"
 
-        if (!this.isWalletOwner(signature, message, address)) { return false };
+        if (!this.isWalletOwner(signature, message, address)) { 
+            console.log("Signature is not valid");
+
+            return false 
+        };
         
         let rule = await this.rulesService.getRuleByGate(organization, gateType, gateId);
 
@@ -55,10 +59,10 @@ export class AuthorizationService {
     }
 
     isWalletOwner(signature: string, message: string, address: string) {
-        const { verifyMessage } = require('@ethersproject/wallet')
+        const { verifyMessage } = require('@ethersproject/wallet');
 
-        const recoveredAddress = verifyMessage(message, signature).toLowerCase()
+        const recoveredAddress = verifyMessage(message, signature).toLowerCase();
         
-        return !!(recoveredAddress === address.toLowerCase())
+        return !!(recoveredAddress === address.toLowerCase());
     }
 }
