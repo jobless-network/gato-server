@@ -9,11 +9,18 @@ export class AuthorizationController {
     @Get('/authorized')
     async isAuthorized(
         @Query('address') address: string,
+        @Query('signature') signature: string,
         @Query('organization') organization: string,
         @Query('gateType') gateType: GateType,
         @Query('gateId') gateId: string,
     ) {
-        return await this.authorizationService.isAuthorized(address, organization, gateType, gateId);
+        return await this.authorizationService.isAuthorized(
+            address.toLocaleLowerCase(),
+            signature.toLocaleLowerCase(),
+            organization,
+            gateType,
+            gateId
+        );
     }
 
     @Get('/required/')

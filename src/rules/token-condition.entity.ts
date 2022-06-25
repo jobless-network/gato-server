@@ -1,16 +1,21 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ContractType } from "./contract-type";
 import { Rule } from "./rule.entity";
 
 @Entity('token-conditions')
 export class TokenCondition{
+  
+  @BeforeInsert()
+  lowercaseContract() {
+      this.contractAddress = this.contractAddress.toLowerCase()
+  }
+  
   @PrimaryGeneratedColumn()
   id?: number;
 
   @Column({ default: 1 })
   chainId: number;
 
-  @Column()
   contractAddress: string;
 
   @Column({

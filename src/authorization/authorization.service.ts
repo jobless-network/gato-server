@@ -6,6 +6,7 @@ import { GateType } from 'src/rules/gate-type';
 import { RulesService } from 'src/rules/rules.service';
 import { TokenCondition } from 'src/rules/token-condition.entity';
 import { setFlagsFromString } from 'v8';
+import Web3 from 'web3';
 
 @Injectable()
 export class AuthorizationService {    
@@ -22,10 +23,15 @@ export class AuthorizationService {
     
     async isAuthorized(
         address: string,
+        signature: string,
         organization: string,
         gateType: GateType,
         gateId: string
     ) : Promise<boolean> {
+        let message = "GATO Access Control"
+
+        if (!this.isWalletOwner(signature, message, address)) { return false };
+        
         let rule = await this.rulesService.getRuleByGate(organization, gateType, gateId);
 
         return Promise.all(rule.conditions.map((condition) => { return this.isConditionMet(condition, address) }))
@@ -46,5 +52,13 @@ export class AuthorizationService {
 
     async isRequired(organization: string, gateType: GateType, gateId: string) {
         return await this.rulesService.ruleExists(organization, gateType, gateId);
+    }
+
+    isWalletOwner(signature: string, message: string, address: string) {
+        const { verifyMessage } = require('@ethersproject/wallet')
+
+        const recoveredAddress = verifyMessage(message, signature).toLowerCase()
+        
+        return !!(recoveredAddress === address.toLowerCase())
     }
 }

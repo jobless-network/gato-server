@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@ethersproject/wallet": "^5.6.2",
     "@nestjs/axios": "^0.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.1.0",
@@ -28,11 +29,13 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.1.4",
     "axios": "^0.27.2",
+    "ethereumjs-util": "^7.1.5",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.3.6"
+    "typeorm": "^0.3.6",
+    "web3": "^1.7.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
