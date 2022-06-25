@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RulesModule } from './rules/rules.module';
+import { AuthorizationModule } from './authorization/authorization.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { RulesModule } from './rules/rules.module';
       synchronize: true, // This for development
       autoLoadEntities: true,
     }),
+    AuthorizationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

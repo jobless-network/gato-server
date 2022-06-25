@@ -1,10 +1,21 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ContractType } from './contract-type';
+import { GateType } from './gate-type';
 import { RulesService } from './rules.service';
 
-type Rule = {
-    id?: number;
+type TokenConditionDto = {
+    chainId: number;
+    contractAddress: String;
+    contractType: ContractType;
+    amount: number;
+}
+
+type CreateRuleDto = {
     organization: string;
-    meetAllConditions: boolean;
+    meetAllConditions?: boolean;
+    conditions: TokenConditionDto[];
+    gateType: GateType;
+    gateId: string;
   };
 
 @Controller('rules')
@@ -17,7 +28,7 @@ export class RulesController {
     }
 
     @Post()
-    addRule(@Body() rule: Rule) {
+    addRule(@Body() rule: CreateRuleDto) {
         return this.rulesService.addRule(rule);
     }
 }
