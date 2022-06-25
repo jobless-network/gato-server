@@ -24,7 +24,7 @@ export class AuthorizationService {
     async isConditionMet(condition : TokenCondition, address: string) : Promise<boolean> {
         let balances = await this.getTokenBalances(address, condition.chainId);
 
-        return this.hasRequiredTokens(condition.contractAddress, condition.amount, balances);
+        return this.hasRequiredTokens(condition.contractAddress.toLowerCase(), condition.amount, balances);
     } 
     
     async isAuthorized(
